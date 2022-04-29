@@ -1,6 +1,5 @@
 var throttle = require('lodash.throttle');
 
-
 const STORAGE_KEY = "feedback-form-state";
 const formData = {};
 
@@ -37,9 +36,15 @@ function populateForm() {
     const savedMassage = localStorage.getItem(STORAGE_KEY);
 
     if (savedMassage) {
-        const { email, message } = JSON.parse(savedMassage);
+        try {
 
-        refs.inputEmail.value = email;
-        refs.textarea.value = message;
+            const { email, message } = JSON.parse(savedMassage);
+
+            refs.inputEmail.value = email;
+            refs.textarea.value = message;
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
